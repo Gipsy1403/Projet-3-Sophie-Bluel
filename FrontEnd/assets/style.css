@@ -28,7 +28,12 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+footer{
+	background-color: white;
+
+}
 body {
+	background-color: #fffef8;
 	line-height: 1;
 }
 ol, ul {
@@ -97,6 +102,55 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+}
+
+/*************  LOG IN ****************/
+.login{
+	height: 80vh ;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.login h2{
+	margin-bottom: 2rem;
+	justify-content: center;
+}
+.login form{
+	display: flex;
+	flex-direction: column;
+	width: 379px;
+}
+.login form label, .login form a{
+	font-size: 14px;
+	font-weight: 500;
+}
+.login form input{
+	margin-bottom: 2rem;
+	margin-top: 5px;
+	height:51px ;
+	filter: drop-shadow(0 4px 14px rgba(0,0,0,0.1));
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	padding-left: 15px;
+}
+.login form button{
+	width: 179px;
+	height: 36px;
+	background-color: #1D6154;
+	margin: auto;
+	border-radius: 60px;
+	border:none;
+	color: white;
+	margin-bottom: 2rem;
+	font-size: 14px;
+	font-weight: 700;
+
+}
+.login form a{
+	color: black;
+	margin: auto;
 }
 #introduction {
 	display: flex;
