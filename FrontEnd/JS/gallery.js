@@ -43,6 +43,7 @@ const filter=document.querySelector(".filter");
 const allCategories=document.createElement("button");
 allCategories.innerText="Tous";
 allCategories.dataset.categoryId="all";
+allCategories.classList.add("filter-btn");
 filter.prepend(allCategories);
 // récupération via l'API de toutes les catégories
 const categories=works.map(work=>work.category);
@@ -53,6 +54,7 @@ uniqueCategory.forEach(cat=>{
 	const btnElement=document.createElement("button");
 	btnElement.innerText=cat.name;
 	btnElement.dataset.categoryId=cat.id;
+	btnElement.classList.add("filter-btn")
 	filter.appendChild(btnElement);
 });
 
@@ -60,6 +62,9 @@ uniqueCategory.forEach(cat=>{
 
 document.querySelectorAll(".filter button").forEach(button=>{
 	button.addEventListener("click", ()=>{
+		document.querySelectorAll(".filter button").forEach(btn => btn.classList.remove("active"));
+		button.classList.add("active");
+
 		const categoryId=button.dataset.categoryId
 		if(categoryId==="all"){
 			generateWorks(works);

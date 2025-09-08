@@ -5,31 +5,32 @@
 // récupération du formulaire
 const formulaireLogIn=document.querySelector(".frm-login");
 // évènement à la soumission du formulaire
-formulaireLogIn.addEventListener("submit",(e)=>{
-	e.preventDefault
+formulaireLogIn.addEventListener("submit",async (e) => {
+	e.preventDefault();
 	// récupération des valeurs des champs
 	const email=document.getElementById("email").value;
 	const password=document.getElementById("mdp").value;
+	// essaye
 	try{
-		const response=fetch("http://localhost:5678/api/users/login",{
+		// d'envoyer une requête à l'API et attend que l'API (ou serveur) réponde avant de poursuivre (await fetch)
+		const response= await fetch("http://localhost:5678/api/users/login",{
 			method:"POST",
-			headers:"content-type":"application/json",
+			headers:{"content-type":"application/json"},
 			body:JSON.stringify({email, password})
 		});
-
+		// Si la réponse n'est pas correct alors lance un message d'erreur
 		if(!response.ok){
-			throw new Error("Vos identifiants sont incorrects")
+			throw new Error("Vos identifiants sont incorrects, veuillez réessayer.")
 		};
-
+		// Attend que la réponse de l'API (ou serveur) arrive avant de poursuivre
 		const data=await response.json();
-		console.log("Token : ", data.token);
-		
-		localStorage.setItem("token", data.token);
+		// Si les identifiants de l'utilisateur sont corrects, il est redirigé à la page index.html
 		window.location.href="/index.html";
+
 	}catch (error){
-		error.textContent="erreur"
+    		alert("Erreur : " + error.message);
 	}
 
 })
 
-console.log();
+console.log(formulaireLogIn);

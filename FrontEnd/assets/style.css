@@ -3,6 +3,8 @@
    License: none (public domain)
 */
 
+/* ******* GENERAL ************* */
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -146,12 +148,15 @@ li:hover {
 	margin-bottom: 2rem;
 	font-size: 14px;
 	font-weight: 700;
+	cursor: pointer;
 
 }
 .login form a{
 	color: black;
 	margin: auto;
 }
+
+/* *************** DESIGNER ESPACE ***************** */
 #introduction {
 	display: flex;
 	align-items: center;
@@ -175,10 +180,13 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-#portfolio h2 {
+
+/* ************** GALLERIE *************** */
+/* #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
-}
+} */
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -191,6 +199,108 @@ li:hover {
 	width: 100%;
 
 }
+
+/* Filtres */
+
+.filter{
+	text-align: center;
+	margin: 2rem 0;
+}
+
+.filter-btn{
+	margin: 5px;
+	color: #1D6154;
+	border-radius: 60px;
+	padding: 5px 10px;
+	background-color: white;
+	border: 1px solid #1D6154;
+	font-weight: 700;
+	font-size: 16px;
+	font-family:"Syne";
+
+}
+.filter-btn:hover{
+	background-color: #1D6154;
+	color: white;
+}
+
+.filter-btn.active{
+	background-color: #1D6154;
+	color: white;
+}
+
+/*  Fenêtre modale */
+
+.modify-modal{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1rem;
+	
+}
+.modify-modal h2{
+	display: block;
+	text-align: center;
+}
+.modify-modal span{
+	display: flex;
+	align-items: center;
+	margin-left: 2rem;
+	cursor: pointer;
+}
+.modify-modal i{
+	margin-right: 15px;
+}
+.modal{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.3);
+}
+.modal-wrapper{
+	width: 630px;
+	max-width: calc(100vh - 200px);
+	max-height: calc(100vh - 200px);
+	margin: auto;
+	background-color: white;
+	border-radius: 10px;
+	overflow: auto;
+	padding: 50px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+
+}
+.modal-wrapper i{
+	
+	bottom: 10px;
+	right: 0;
+	width:24px;
+	height: 24px;
+}
+.modal-wrapper ul{
+	text-align: center;
+	font-size: 26px;
+	font-weight: 400;
+}
+
+.modal-wrapper a{
+	color: white;
+	background-color: #1D6154;
+	height: 36px;
+	width: 237px;
+	border-radius: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+/* ************FRM CONTACT ************* */
+
 #contact {
 	width: 50%;
 margin: auto;
@@ -233,6 +343,8 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+
+/* **************** FOOTER ****************** */
 
 footer nav ul {
 	display: flex;
