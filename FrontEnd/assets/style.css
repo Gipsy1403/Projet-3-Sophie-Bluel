@@ -32,6 +32,10 @@ footer, header, hgroup, menu, nav, section {
 }
 footer{
 	background-color: white;
+	height: 60px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
 
 }
 body {
@@ -149,7 +153,11 @@ li:hover {
 	font-size: 14px;
 	font-weight: 700;
 	cursor: pointer;
+	font-family: "Syne";
 
+}
+.login form button:hover, .modal-wrapper a:hover{
+	background-color:#0e2f28 ;
 }
 .login form a{
 	color: black;
@@ -171,7 +179,8 @@ li:hover {
 }
 
 #introduction article {
-	flex: 1
+	flex: 1;
+	padding: 0 4rem 0 0;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -186,7 +195,9 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 } */
-
+#portfolio{
+	padding: 0 4rem;
+}
 .gallery {
 	width: 100%;
 	display: grid;
@@ -235,17 +246,20 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 1rem;
+	margin-top: 8rem;
 	
 }
 .modify-modal h2{
 	display: block;
 	text-align: center;
 }
-.modify-modal span{
+.modify-modal a{
 	display: flex;
 	align-items: center;
 	margin-left: 2rem;
-	cursor: pointer;
+	color: inherit;
+	text-decoration: none;
+
 }
 .modify-modal i{
 	margin-right: 15px;
@@ -262,32 +276,60 @@ li:hover {
 	background: rgba(0, 0, 0, 0.3);
 }
 .modal-wrapper{
+	box-sizing: border-box;
 	width: 630px;
-	max-width: calc(100vh - 200px);
-	max-height: calc(100vh - 200px);
+	height: 100%;
+	max-width: calc(100vh - 10px);
+	max-height: calc(100vh - 50px);
 	margin: auto;
 	background-color: white;
 	border-radius: 10px;
-	overflow: auto;
-	padding: 50px;
+	padding: 20px;
+	position: relative;
+}
+.modal-wrapper .fa-xmark{
+	font-size: 25px;
 	display: flex;
-	justify-content: center;
-	flex-direction: column;
-
+	justify-content: end;
+	margin-bottom: 15px;
+	cursor: pointer;
 }
-.modal-wrapper i{
-	
-	bottom: 10px;
-	right: 0;
-	width:24px;
-	height: 24px;
-}
-.modal-wrapper ul{
+.modal-wrapper h3{
 	text-align: center;
 	font-size: 26px;
 	font-weight: 400;
+	padding-bottom: 2rem;
+}
+.modal-wrapper #container-images{
+	border-bottom: 1px solid #b3b3b3;
+	padding-bottom: 2rem;
+	display: grid;
+	grid-template-columns: repeat(5,1fr);
+	gap: 10px;
+	margin: 0 80px;
+}
+.modal-wrapper #container-images .pictures{
+	display: inline-block;
+	position: relative;
+}
+.modal-wrapper #container-images img{
+	display: block;
+	width: 100%;
+	padding: 0.8rem 0;
 }
 
+.modal-wrapper #container-images .fa-trash-can{
+	border: 4px solid black;
+	background-color: black;
+	color: white;
+	font-size: 10px;
+	position: absolute;
+	top: 17px;
+	right: 5px;
+	border-radius: 2px;
+	cursor: pointer;
+
+}
 .modal-wrapper a{
 	color: white;
 	background-color: #1D6154;
@@ -297,8 +339,13 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin:auto;
+	margin-top: 2rem;
+	text-decoration: none;
+	font-family: "Syne";
 
 }
+
 /* ************FRM CONTACT ************* */
 
 #contact {
@@ -349,6 +396,7 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+
 }
 

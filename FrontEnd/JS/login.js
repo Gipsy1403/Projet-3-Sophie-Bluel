@@ -20,7 +20,7 @@ formulaireLogIn.addEventListener("submit",async (e) => {
 		});
 		// Si la réponse n'est pas correct alors lance un message d'erreur
 		if(!response.ok){
-			throw new Error("Vos identifiants sont incorrects, veuillez réessayer.")
+			throw new Error("Erreur dans l’identifiant ou le mot de passe")
 		};
 		// Attend que la réponse de l'API (ou serveur) arrive avant de poursuivre
 		const data=await response.json();

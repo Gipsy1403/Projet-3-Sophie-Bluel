@@ -11,6 +11,8 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="/JS/gallery.js" defer></script>
+	<script type="module" src="/JS/modal.js" defer></script>
+
 
 </head>
 <body>
@@ -39,22 +41,20 @@
 	</section>
 	<section id="portfolio">
 		<div class="modify-modal">
-			<h2>Mes Projets</h2>
-			<span><i class="fa-regular fa-pen-to-square"></i>modifier</span>
+			<h2>Mes projets</h2>
+			<a href="#modal1"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 		</div>
-		<aside id="modal" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" style= "display:none;">
+		<!-- ************ FENETRE MODALE ************** -->
+		<aside id="modal1" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
 			<div class="modal-wrapper">
-				<i class="fa-solid fa-xmark"></i>
-				<ul id="title-modal">Galerie photo
-					<li><img src="" alt=""></li>
-				</ul>
-				<a>Ajouter une photo</a>
+				<i class="fa-solid fa-xmark modal-close"></i>
+				<h3 id="title-modal">Galerie photo</h3>
+				<div id="container-images"></div>
+				<a href="">Ajouter une photo</a>
 			</div>
-
-
 		</aside>
 		
-		<!--<i class="fa-solid fa-trash-can"></i>
+		<!--
 		<i class="fa-regular fa-image"></i>
 		<i class="fa-solid fa-arrow-left"></i> -->
 		<div class="filter"></div>
