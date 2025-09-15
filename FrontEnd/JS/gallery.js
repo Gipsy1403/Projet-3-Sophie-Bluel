@@ -16,6 +16,7 @@ function generateWorks(works){
 		const imageElement=document.createElement("img");
 		// récupération de l'image via l'API
 		imageElement.src=work.imageUrl;
+		imageElement.alt=work.title;
 		const textElement=document.createElement("figcaption");
 		// récupération du texte via l'API
 		textElement.innerText=work.title;
@@ -25,7 +26,6 @@ function generateWorks(works){
 		figureElement.appendChild(imageElement);
 		figureElement.appendChild(textElement);
 
-		
 	}
 };
 // appel de la fonction afin que les travaux apparaissent à l'écran
@@ -44,6 +44,7 @@ const allCategories=document.createElement("button");
 allCategories.innerText="Tous";
 allCategories.dataset.categoryId="all";
 allCategories.classList.add("filter-btn");
+// met le bouton Tous avant les autres boutons
 filter.prepend(allCategories);
 // récupération via l'API de toutes les catégories
 const categories=works.map(work=>work.category);
