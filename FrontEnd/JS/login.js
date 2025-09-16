@@ -12,6 +12,7 @@ formulaireLogIn.addEventListener("submit",async (e) => {
 	const password=document.getElementById("mdp").value;
 	// essaye
 	try{
+		
 		// d'envoyer une requête à l'API et attend que l'API (ou serveur) réponde avant de poursuivre (await fetch)
 		const response= await fetch("http://localhost:5678/api/users/login",{
 			method:"POST",
