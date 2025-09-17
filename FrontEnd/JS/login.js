@@ -25,6 +25,8 @@ formulaireLogIn.addEventListener("submit",async (e) => {
 		};
 		// Attend que la réponse de l'API (ou serveur) arrive avant de poursuivre
 		const data=await response.json();
+		// stockage du token généré (propre à l'utilisateur) lors de la connexion de l'utilisateur
+		localStorage.setItem("token",data.token);
 		// Si les identifiants de l'utilisateur sont corrects, il est redirigé à la page index.html
 		window.location.href="/index.html";
 

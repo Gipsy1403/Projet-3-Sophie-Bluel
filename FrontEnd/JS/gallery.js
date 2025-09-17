@@ -28,6 +28,8 @@ function generateWorks(works){
 
 	}
 };
+//  permet de rendre la fonction globale
+window.generateWorks = generateWorks;
 // appel de la fonction afin que les travaux apparaissent à l'écran
 generateWorks(works);
 

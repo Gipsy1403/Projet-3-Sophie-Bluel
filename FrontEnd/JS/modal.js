@@ -1,3 +1,5 @@
+const token =localStorage.getItem("token");
+
 // *******************************************//
 // *			   FENETRES MODALES			*//
 // *******************************************//
@@ -36,6 +38,8 @@ function modalPhotos(works){
 		divPictures.appendChild(picture);
 		divPictures.appendChild(trash);
 
+
+// ? QUESTION: lors de la suppression, la photo reste dans la modale sauf après être intervenue en la fermant ou actualiser la page
 		// SUPPRIMER UN WORK
 		trash.addEventListener("click",async(e)=>{
 			e.preventDefault();
@@ -43,14 +47,18 @@ function modalPhotos(works){
 			const deleteWork=await fetch(`http://localhost:5678/api/works/${img.id}`,{
 				method:"DELETE",
 				headers:{
-					"Content-type":"*/*",
-					"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
+					"Authorization": `Bearer ${token}`
 				}
 			});
+			// console.log(localStorage.getItem("token"));
+
 			if(deleteWork.ok){
-				works.splice(i,1);
-				alert("La suppression est un succés")
-				modalPhotos(works);
+				// creation d'un autre tableau(works) gardant toutes les images, sauf celle dont l'id correspond à l'image à supprimer
+				works = works.filter(work => work.id !== img.id);
+				alert("La suppression est un succés");
+				// suppression de la div contenant le work supprimé précédemment
+				divPictures.remove();
+				generateWorks(works);
 
 			}else{
 				console.error("Erreur lors de la suppression : ", deleteWork.status)
@@ -294,16 +302,66 @@ function formValidation(){
 
 // ****** ENVOI DU FORMULAIRE A L'API ******* //
 
+// ? QUESTION: je n'arrive pas à récupérer l' imageURL, la console renvoit : http://127.0.0.1:5500/ net::ERR_HTTP_RESPONSE_CODE_FAILURE 405 (Method Not Allowed)
+// function addWork(){
+// 	const formWork=document.querySelector(".form-work");
+// 	formWork.addEventListener("submit",async (e)=>{
+// 		e.preventDefault();
+// 		// const fileInput=document.querySelector("#imageUrl");
+// 		const file=e.target.files[0];
+// 		const title=e.target.querySelector("#title").value;
+// 		const choiceCategory=e.target.querySelector("#categoryId").value;
+// 		const formData=new FormData();
+// 		formData.append("imageUrl", file);
+// 		formData.append("title", title);
+// 		formData.append("categoryId", choiceCategory);
+// 		formData.forEach((value, key) => {
+// 		console.log(key, value);
+// 		});
+// 		try{
+// 		const response=await fetch("http://localhost:5678/api/works",{
+// 			method:"POST",
+// 			headers: {
+// 				"Authorization": `Bearer ${token}`
+// 			},
+// 			body: formData
+// 		});
+// 			if(response.ok){
+// 				alert("Photo ajoutée avec succès.");
+// 				const payload=await response.json();
+// 				works.push(payload);
+// 				modalPhotos(works);
+// 				formWork.reset();
+// 				document.querySelector(".photo-insert").innerHTML="";
+// 			}else{
+// 				alert("Erreur lors de l'ajout");
+// 				console.error(response.status);
+// 			}
+// 		}catch(error){
+// 			console.error("Erreur réseau : ", error);
+// 			alert("Erreur de réseau");
+// 		}
+// 	});
+ 
+// }
+
+// document.addEventListener("DOMContentLoaded", addWork);
+
+
+
 function addWork(){
 	const formWork=document.querySelector(".form-work");
 	formWork.addEventListener("submit",async (e)=>{
 		e.preventDefault();
-		const formData=new FormData(formWork);
+		const formData=new FormData();
+		formData.append("imageUrl", file);
+		formData.append("title", title);
+		formData.append("categoryId", choiceCategory);
 		try{
 		const response=await fetch("http://localhost:5678/api/works",{
 			method:"POST",
 			headers: {
-				"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
+				"Authorization": `Bearer ${token}`
 			},
 			body: formData
 		});
@@ -329,5 +387,4 @@ function addWork(){
 // const validateBtn=document.querySelector(".validate-btn");
 // validateBtn.addEventListener("click",addWork);
 addWork();
-
 console.log();
