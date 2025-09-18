@@ -213,47 +213,92 @@ openModal2.addEventListener("click", openSecondModal);
 
 // ****** TELECHARGEMENT DE L'IMAGE ******* //
 
-function uploadImg(e){
-	e.preventDefault();
-	// const addPicture=document.querySelector("label[for='imageUrl']");
-	const inputUpload=document.querySelector("#imageUrl");
-	const photoInsert=document.querySelector(".photo-insert");
-	inputUpload.click();
-	// addPicture.addEventListener("click", (e)=>{
-	// 	e.preventDefault();
-	// 	inputUpload.click();
-		
-	// });
-	// écouteur dès l'instant où je choisis une image via mon ordinateur
-	inputUpload.addEventListener("change", (e) => {
-		// récupération du 1er élément ciblé du tableau dans le fichier
-		const file = e.target.files[0]; 
-		// Si il n'y a pas de fichier récupéré alors on sort
-		if (!file) return;
-
-		// file.type décrit le type MIME du fichier(extensions) et la méthode startsWith permet de vérifier que le fichier commence par "image"
-		if (!file.type.startsWith("image/")) {
-		alert("Merci de choisir une image valide (jpg ou png)");
-		return;
-		}
-
-		// Crée un aperçu de l’image
-		const imgPreview = document.createElement("img");
-		// crée une URL provisoire dans le navigateur pour que l'image s'affiche dans la modal
-		imgPreview.src = URL.createObjectURL(file);
-		imgPreview.style.maxHeight = "100%";
-		imgPreview.style.width = "auto";
-		// Remplace le contenu du bloc par l’image
-		photoInsert.innerHTML = "";
-		photoInsert.appendChild(imgPreview);
-	});
-	formValidation();
+const sndModal=document.querySelector("#modal2")
+const form = document.querySelector(".form-work");
+const inputImage=document.querySelector("#imageUrl");
+const photoInsert=document.querySelector(".photo-insert");
+const validateBtn=document.querySelector(".validate-btn");
 
 
+function checkForm() {
+  const image = inputImage.files[0];
+  const title = document.querySelector("#title").value.trim();
+  const category = document.querySelector("#categoryId").value;
+
+  if (image && title && category) {
+    validateBtn.classList.add("enabled"); // CSS : vert
+  } else {
+    validateBtn.classList.remove("enabled"); // CSS : gris
+  }
 }
-const addPicture=document.querySelector("label[for='imageUrl']");
-addPicture.addEventListener("click", uploadImg);
+// écoute en temps réel
+inputImage.addEventListener("change", checkForm);
+document.querySelector("#title").addEventListener("input", checkForm);
+document.querySelector("#categoryId").addEventListener("change", checkForm);
 
+validateBtn.addEventListener("click", function(e){
+  if(!validateBtn.classList.contains("enabled")){
+    e.preventDefault();
+    alert("Veuillez remplir tous les champs");
+  }else{
+	form.requestSubmit();
+  }
+});
+
+
+inputImage.addEventListener("change",()=>{
+	const file=inputImage.files[0];
+	if(file){
+		const reader=new FileReader();
+		reader.onload=(e)=>{
+			photoInsert.querySelector("i").style.display = "none";
+      photoInsert.querySelector("label").style.display = "none";
+      photoInsert.querySelector("span").style.display = "none";
+      let preview = photoInsert.querySelector("img");
+      if (!preview) {
+        preview = document.createElement("img");
+        preview.style.width = "auto";
+        preview.style.maxHeight = "100%";
+        photoInsert.appendChild(preview);
+      }
+      preview.src = e.target.result;
+	};
+		reader.readAsDataURL(file);
+	}
+});
+
+form.addEventListener("submit", async function (e) {
+	e.preventDefault();
+	const image = document.querySelector("#imageUrl").files[0];
+	const title = document.querySelector("#title").value;
+	const category = document.querySelector("#categoryId").value;
+	console.log(image, title, category); 
+
+	const formData=new FormData();
+	formData.append("image",image);
+	formData.append("title",title);
+	formData.append("category",category);
+
+	try{
+		const sendWork= await fetch("http://localhost:5678/api/works",{
+			method:"POST",
+			headers:{
+				Authorization: `Bearer ${token}`
+			},
+			body:formData,
+		});
+		if (!sendWork.ok){
+			throw new Error(`Erreur HTTP : ${sendWork.status}`)
+		}
+		const data=await sendWork.json();
+		console.log ("Photo ajouté : ", data);
+		sndModal.style.display="none";
+		alert("La photo a été ajoutée avec succés.")
+	}catch(error){
+	console.error("Erreur : ", error);
+	}
+
+});
 
 // ****** TELECHARGEMENT DES CATEGORIES ******* //
 
@@ -282,109 +327,12 @@ async function loadCategories(){
 			// précise que la balise option est l'enfant de la balise select
 			choiceCategory.appendChild(option);
 		});
-		choiceCategory.addEventListener("change", formValidation);
+		// choiceCategory.addEventListener("change", formValidation);
 	}catch (error){
 		console.error("Erreur de l'API catégories : ", error);
 	}
 
 }
 
-// ****** VALIDATION DU FORMULAIRE ******* //
 
-function formValidation(){
-	const title=document.querySelector("#title").value.trim();
-	const choiceCategory=document.querySelector("#categoryId").value;
-	const validateBtn=document.querySelector(".validate-btn");
-	if(uploadImg && title && choiceCategory){
-	validateBtn.style.backgroundColor="#1D6154";
-	}
-}
-
-// ****** ENVOI DU FORMULAIRE A L'API ******* //
-
-// ? QUESTION: je n'arrive pas à récupérer l' imageURL, la console renvoit : http://127.0.0.1:5500/ net::ERR_HTTP_RESPONSE_CODE_FAILURE 405 (Method Not Allowed)
-// function addWork(){
-// 	const formWork=document.querySelector(".form-work");
-// 	formWork.addEventListener("submit",async (e)=>{
-// 		e.preventDefault();
-// 		// const fileInput=document.querySelector("#imageUrl");
-// 		const file=e.target.files[0];
-// 		const title=e.target.querySelector("#title").value;
-// 		const choiceCategory=e.target.querySelector("#categoryId").value;
-// 		const formData=new FormData();
-// 		formData.append("imageUrl", file);
-// 		formData.append("title", title);
-// 		formData.append("categoryId", choiceCategory);
-// 		formData.forEach((value, key) => {
-// 		console.log(key, value);
-// 		});
-// 		try{
-// 		const response=await fetch("http://localhost:5678/api/works",{
-// 			method:"POST",
-// 			headers: {
-// 				"Authorization": `Bearer ${token}`
-// 			},
-// 			body: formData
-// 		});
-// 			if(response.ok){
-// 				alert("Photo ajoutée avec succès.");
-// 				const payload=await response.json();
-// 				works.push(payload);
-// 				modalPhotos(works);
-// 				formWork.reset();
-// 				document.querySelector(".photo-insert").innerHTML="";
-// 			}else{
-// 				alert("Erreur lors de l'ajout");
-// 				console.error(response.status);
-// 			}
-// 		}catch(error){
-// 			console.error("Erreur réseau : ", error);
-// 			alert("Erreur de réseau");
-// 		}
-// 	});
- 
-// }
-
-// document.addEventListener("DOMContentLoaded", addWork);
-
-
-
-function addWork(){
-	const formWork=document.querySelector(".form-work");
-	formWork.addEventListener("submit",async (e)=>{
-		e.preventDefault();
-		const formData=new FormData();
-		formData.append("imageUrl", file);
-		formData.append("title", title);
-		formData.append("categoryId", choiceCategory);
-		try{
-		const response=await fetch("http://localhost:5678/api/works",{
-			method:"POST",
-			headers: {
-				"Authorization": `Bearer ${token}`
-			},
-			body: formData
-		});
-			if(response.ok){
-				alert("Photo ajoutée avec succès.");
-				const payload=await response.json();
-				works.push(payload);
-				modalPhotos(works);
-				formWork.reset();
-				document.querySelector(".photo-insert").innerHTML="";
-			}else{
-				alert("Erreur lors de l'ajout");
-				console.error(response.status);
-			}
-		}catch(error){
-			console.error("Erreur réseau : ", error);
-			alert("Erreur de réseau");
-		}
-	});
- 
-}
-
-// const validateBtn=document.querySelector(".validate-btn");
-// validateBtn.addEventListener("click",addWork);
-addWork();
 console.log();

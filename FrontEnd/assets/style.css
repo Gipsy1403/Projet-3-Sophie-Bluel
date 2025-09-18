@@ -306,6 +306,7 @@ li:hover {
 	padding-bottom: 2rem;
 	padding-top: 1rem;
 }
+
 .modal-wrapper form .photo-insert{
 	display: flex;
 	justify-content: center;
@@ -325,7 +326,7 @@ li:hover {
 	margin-bottom: 0.5rem;
 
 }
-.modal-wrapper form .photo-insert label{
+.modal-wrapper form .photo-insert .custom-upload{
 	background-color: #cbd6dc;
 	border-radius: 50px;
 	padding: 10px 25px;
@@ -333,6 +334,7 @@ li:hover {
 	font-weight: 500;
 	cursor: pointer;
 	margin-bottom: 0.3rem;
+	display: inline-block;
 }
 .modal-wrapper form .photo-insert span{
 	font-size: 10px;
@@ -354,7 +356,7 @@ li:hover {
 	filter: drop-shadow(0 4px 14px rgba(0,0,0,0.1));
 	border: none;
 }
-.modal-wrapper form button{
+.modal-wrapper form .validate-btn{
 	color: white;
 	background-color: #a7a7a7;
 	height: 36px;
@@ -368,7 +370,15 @@ li:hover {
 	text-decoration: none;
 	font-family: "Syne";
 	border: none;
+	cursor: pointer;
 
+}
+.modal-wrapper form .validate-btn.enabled{
+	background-color: #1D6154;
+}
+.modal-wrapper form .validate-btn.enabled:hover{
+	background-color: #0e2f28;
+	cursor: pointer;
 }
 .modal-wrapper #container-images{
 	border-bottom: 1px solid #b3b3b3;

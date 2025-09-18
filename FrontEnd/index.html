@@ -65,15 +65,15 @@
 				<form action="" method="post" class="form-work">
 					<div class="photo-insert">
 						<i class="fa-regular fa-image"></i>
-						<label for="imageUrl">+ Ajouter photo</label>
-						<input type="file" id="imageUrl" name="imageUrl" style="display:none;">
+						<label for="imageUrl" class="custom-upload">+ Ajouter photo</label>
+						<input type="file" id="imageUrl" name="image" style="display:none;">
 						<span>jpg, png : 4mo max</span>
 					</div>
 					<div class="content-insert">
 						<label for="title">Titre</label>
-						<input type="text" id="title" name="title">
+						<input type="text" id="title" name="title" accept="image/*">
 						<label for="categoryId">Catégorie</label>
-						<select name="categoryId" id="categoryId" name="categoryId"></select>
+						<select name="category" id="categoryId"></select>
 					</div>
 					<button class="validate-btn">Valider</button>
 				</form>
