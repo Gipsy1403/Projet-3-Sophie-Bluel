@@ -1,42 +1,11 @@
-// récupération de l'API
-const response=await fetch("http://localhost:5678/api/works");
-const works=await response.json();
+// import { modalPhotos } from "./modal.js";
 
-// fonction permettant de récupérer les travaux
-function generateWorks(works){
-	// déclaration de la section contenant les images
-	const gallery=document.querySelector(".gallery");
-	// permet de vider le cache avant de réafficher les images par rapport aux boutons des filtres par catégorie
-	gallery.innerHTML=" ";
-
-	for (let i=0; i<works.length; i++){
-		const work=works[i];
-		// création des éléments pour contruire la gallery
-		const figureElement=document.createElement("figure");
-		const imageElement=document.createElement("img");
-		// récupération de l'image via l'API
-		imageElement.src=work.imageUrl;
-		imageElement.alt=work.title;
-		const textElement=document.createElement("figcaption");
-		// récupération du texte via l'API
-		textElement.innerText=work.title;
-		
-		// rattachement de chacun des éléments à la galerie
-		gallery.appendChild(figureElement);
-		figureElement.appendChild(imageElement);
-		figureElement.appendChild(textElement);
-
-	}
-};
-//  permet de rendre la fonction globale
-window.generateWorks = generateWorks;
-// appel de la fonction afin que les travaux apparaissent à l'écran
-generateWorks(works);
-
-
-// *******************************************//
-// *			FILTRES PAR CATEGORIE		*//
-// *******************************************//
+export let works=[];
+export async function loadWorks(){
+	// récupération de l'API
+	const response=await fetch("http://localhost:5678/api/works");
+	works=await response.json();
+	generateWorks(works);
 
 // CREATION DES BOUTONS//
 
@@ -78,4 +47,47 @@ document.querySelectorAll(".filter button").forEach(button=>{
 		
 	});
 });
+
+}
+
+
+// fonction permettant de récupérer les travaux
+export function generateWorks(works){
+	if (!works || !Array.isArray(works)) return;
+	// déclaration de la section contenant les images
+	const gallery=document.querySelector(".gallery");
+	// permet de vider le cache avant de réafficher les images par rapport aux boutons des filtres par catégorie
+	gallery.innerHTML="";
+	
+	for (let i=0; i<works.length; i++){
+		const work=works[i];
+		// création des éléments pour contruire la gallery
+		const figureElement=document.createElement("figure");
+		const imageElement=document.createElement("img");
+		// récupération de l'image via l'API
+		imageElement.src=work.imageUrl;
+		imageElement.alt=work.title;
+		const textElement=document.createElement("figcaption");
+		// récupération du texte via l'API
+		textElement.innerText=work.title;
+		
+		// rattachement de chacun des éléments à la galerie
+		gallery.appendChild(figureElement);
+		figureElement.appendChild(imageElement);
+		figureElement.appendChild(textElement);
+		
+	}
+};
+//  permet de rendre la fonction globale
+// window.generateWorks = generateWorks;
+// appel de la fonction afin que les travaux apparaissent à l'écran
+// generateWorks(works);
+loadWorks();
+
+
+// *******************************************//
+// *			FILTRES PAR CATEGORIE		*//
+// *******************************************//
+
+
 
