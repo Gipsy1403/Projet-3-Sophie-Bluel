@@ -1,4 +1,21 @@
-// *******************************************//
+// import { setActiveLink } from "./nav.js";
+	// const linksLogin=document.querySelectorAll("nav a");
+	// const urlLoginPath=window.location.pathname;
+	// const urlLoginHash=window.location.hash;
+	// linksLogin.forEach(linkLogin=>{
+	// 	const hrefLogin=linkLogin.getAttribute("href");
+	// 	if(hrefLogin.startsWith("#") && hrefLogin===urlLoginHash){
+	// 		linkLogin.classList.add("active");
+	// 	}else if(! hrefLogin.startsWith("#") && hrefLogin===urlLoginPath){
+	// 		linkLogin.classList.add("active");
+	// 	}else if(hrefLogin.includes(urlLoginPath)&&urlLoginHash && hrefLogin.endsWith(urlLoginHash
+
+	// 	)){
+	// 		linkLogin.classList.add("active");
+	// 	}
+	// });
+
+// // *******************************************//
 // *				CONNEXION				*//
 // *******************************************//
 

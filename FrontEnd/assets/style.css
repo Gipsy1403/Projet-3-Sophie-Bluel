@@ -73,7 +73,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 a{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -82,7 +82,7 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1 a > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
@@ -105,9 +105,19 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
-li:hover {
+nav li img{
+	width: 22px;
+	height: 22px;
+}
+nav li a{
+	text-decoration: none;
+	color: black;
+}
+nav li a:hover {
 	color: #B1663C;
+}
+nav li a.active,.login-bold{
+	font-weight: 700;
 }
 
 /*************  LOG IN ****************/

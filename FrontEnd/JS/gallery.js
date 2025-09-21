@@ -1,3 +1,16 @@
+// import { setActiveLink } from "./nav.js";
+//   const linksGallery = document.querySelectorAll("nav a");
+
+//   linksGallery.forEach(link => {
+//     link.addEventListener("click", () => {
+//       // on enlève .active de tous les liens
+//       linksGallery.forEach(l => l.classList.remove("active"));
+
+//       // on ajoute .active seulement au lien cliqué
+//       link.classList.add("active");
+//     });
+//   });
+
 
 export let works=[];
 export async function loadWorks(){
