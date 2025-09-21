@@ -45,8 +45,6 @@ export function modalPhotos(){
 		divPictures.appendChild(picture);
 		divPictures.appendChild(trash);
 
-
-// ? QUESTION: lors de la suppression, la photo reste dans la modale sauf après être intervenue en la fermant ou actualiser la page
 		// SUPPRIMER UN WORK
 		trash.addEventListener("click",async(e)=>{
 			e.preventDefault();
@@ -194,7 +192,8 @@ function returnFirstModal(e){
 	modal.addEventListener("click", closeModal);
 	// ajoute un écouteur sur le clic de la balise i (X)
 	modal.querySelector(".modal-close").addEventListener("click", closeModal);
-
+	generateWorks();
+	modalPhotos();
 }
 
 // ****** FERMER LA 12eme MODALE ******* //
@@ -204,6 +203,13 @@ function closeSecondModal(e){
 	if(secondModal === null) return
 	// la page ne se recharge pas
 	e.preventDefault();
+	form.reset();
+	validateBtn.classList.remove("enabled");
+	const preview = photoInsert.querySelector("img");
+	if (preview) {
+	photoInsert.removeChild(preview);
+	}
+  	photoInsert.querySelectorAll("i, label, span").forEach(el => el.style.display = "block");
 	// la fenêtre modale disparait de l'écran
 	secondModal.style.display= "none";
 	// remets l'attribut aria hidden à true pour éviter aux les lecteurs d'écran de la lire
