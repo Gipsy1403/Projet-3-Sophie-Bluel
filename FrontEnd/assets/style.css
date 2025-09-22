@@ -57,6 +57,12 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
 /** end reset css**/
 body {
 	max-width: 1140px;
@@ -69,10 +75,12 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+/************* BARRE DE NAVIGATION ****************/
+
 section {
 	margin: 50px 0
 }
-
+/* logo */
 h1 a{
 	display: flex;
 	flex-direction: column;
@@ -88,13 +96,7 @@ h1 a > span {
 	letter-spacing: 0.1em;
 ;
 }
-
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
-}
+/* menu */
 nav ul {
 	display: flex;
 	align-items: center;
@@ -250,8 +252,9 @@ nav li a.active,.login-bold{
 	color: white;
 }
 
-/*  Fenêtres modales */
+/*************  FENETRES MODALES ****************/
 
+/* general*/
 .modify-modal{
 	display: flex;
 	justify-content: center;
@@ -297,6 +300,74 @@ nav li a.active,.login-bold{
 	padding: 20px;
 	position: relative;
 }
+.modal-wrapper h3{
+	text-align: center;
+	font-size: 26px;
+	font-weight: 400;
+	padding-bottom: 2rem;
+	padding-top: 1rem;
+}
+/* messages des fenêtres modales */
+.modal1-message, .modal2-message{
+	display: none;
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: rgba(0,0,0,0.8);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	z-index: 1000;
+	text-align: center;
+}
+/* modale 1 */
+.modal-wrapper #container-images{
+	border-bottom: 1px solid #b3b3b3;
+	padding-bottom: 2rem;
+	display: grid;
+	grid-template-columns: repeat(5,1fr);
+	gap: 10px;
+	margin: 0 80px;
+}
+.modal-wrapper #container-images .pictures{
+	display: inline-block;
+	position: relative;
+}
+.modal-wrapper #container-images img{
+	display: block;
+	width: 100%;
+	padding: 0.8rem 0;
+}
+
+.modal-wrapper #container-images .fa-trash-can{
+	border: 4px solid black;
+	background-color: black;
+	color: white;
+	font-size: 10px;
+	position: absolute;
+	top: 17px;
+	right: 5px;
+	border-radius: 2px;
+	cursor: pointer;
+
+}
+.modal-wrapper a{
+	color: white;
+	background-color: #1D6154;
+	height: 36px;
+	width: 237px;
+	border-radius: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin:auto;
+	margin-top: 2rem;
+	text-decoration: none;
+	font-family: "Syne";
+
+}
+/* modale 2 */
 .modal-wrapper .interaction-icons{
 	display: flex;
 	justify-content: space-between;
@@ -309,14 +380,7 @@ nav li a.active,.login-bold{
 	margin-bottom: 15px;
 	cursor: pointer;
 }
-.modal-wrapper h3{
-	text-align: center;
-	font-size: 26px;
-	font-weight: 400;
-	padding-bottom: 2rem;
-	padding-top: 1rem;
-}
-
+/* formulaire ajout des travaux modale 2 */
 .modal-wrapper form .photo-insert{
 	display: flex;
 	justify-content: center;
@@ -391,64 +455,7 @@ nav li a.active,.login-bold{
 	background-color: #0e2f28;
 	cursor: pointer;
 }
-.modal-wrapper #container-images{
-	border-bottom: 1px solid #b3b3b3;
-	padding-bottom: 2rem;
-	display: grid;
-	grid-template-columns: repeat(5,1fr);
-	gap: 10px;
-	margin: 0 80px;
-}
-.modal-wrapper #container-images .pictures{
-	display: inline-block;
-	position: relative;
-}
-.modal-wrapper #container-images img{
-	display: block;
-	width: 100%;
-	padding: 0.8rem 0;
-}
 
-.modal-wrapper #container-images .fa-trash-can{
-	border: 4px solid black;
-	background-color: black;
-	color: white;
-	font-size: 10px;
-	position: absolute;
-	top: 17px;
-	right: 5px;
-	border-radius: 2px;
-	cursor: pointer;
-
-}
-.modal-wrapper a{
-	color: white;
-	background-color: #1D6154;
-	height: 36px;
-	width: 237px;
-	border-radius: 60px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin:auto;
-	margin-top: 2rem;
-	text-decoration: none;
-	font-family: "Syne";
-
-}
-.modal1-message, .modal2-message{
-	display: none;
-	position: absolute;
-	top: 20px;
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: rgba(0,0,0,0.8);
-	color: white;
-	padding: 10px 20px;
-	border-radius: 5px;
-	z-index: 1000;
-	text-align: center;
-}
 
 /* ************FRM CONTACT ************* */
 

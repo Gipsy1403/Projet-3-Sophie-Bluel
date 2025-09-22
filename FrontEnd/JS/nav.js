@@ -1,26 +1,37 @@
+// +++++++++++++++++++++++++++++++++++++//
+// 		BARRE DE NAVIGATION			//
+// +++++++++++++++++++++++++++++++++++++//
+
 
 const navLinks = document.querySelectorAll("nav a");
-const currentPath = window.location.pathname;  // /index.html ou /login.html
-const currentHash = window.location.hash;      // #portfolio ou #contact
+const currentPath = window.location.pathname;
+const currentHash = window.location.hash;
 
+// STYLE GRAS DES MENUS SI LIEN ACTIF // 
+
+// pour chaque lien du menu
 navLinks.forEach(link => {
-  const href = link.getAttribute("href");
+	// récupère l'attribut href
+	const href = link.getAttribute("href");
+	// si l'attribut href contient pathname ou hash ou le has de la page actuelle et si le path de la page actuelle n'est pas index.htm et n'a pas de hash de la page actuelle
+	if ((href === currentPath || href === currentHash || href.endsWith(currentHash)) && !
+	(currentPath === "/index.html" && !currentHash)) {
+		// alors mettre la classe active sur le lien
+		link.classList.add("active");
+	}
+	// au clic du lien
+	link.addEventListener("click", (e) => {
+		// supprime la classe active de tous les liens pour ne garder qu'un seul actif
+		navLinks.forEach(l => l.classList.remove("active"));
+		// ajoute une classe active sur le lien que l'utilisateur a cliqué
+		link.classList.add("active");
+		// si l'attribut href contient une ancre et que le Pathname de la page courante est également à la page index.html
+		if (href.startsWith("#") && currentPath === "/index.html") {
+			alors
+			// quitte la fonction
+			return; 
+		}
 
-  // Gestion de l'active pour la page courante
-
-  if ((href === currentPath || href === currentHash || href.endsWith(currentHash)) && !(currentPath === "/index.html" && !currentHash)) {
-    link.classList.add("active");
-  }
-  // Au clic, redirection si nécessaire et ajout de .active
-  link.addEventListener("click", (e) => {
-    navLinks.forEach(l => l.classList.remove("active")); // retire l'ancien active
-    link.classList.add("active");
-
-    // Si c'est un lien ancre vers la même page, on laisse le scroll normal
-    if (href.startsWith("#") && currentPath === "/index.html") {
-      return; // scroll normal
-    }
-
-    // Sinon, laisse le lien faire sa redirection normale
-  });
+	});
 });
+

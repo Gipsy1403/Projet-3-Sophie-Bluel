@@ -18,9 +18,12 @@
 </head>
 <body>
 <header>
+	<!-- barre de navigation -->
+	 <!-- logo -->
 	<h1><a href="index.html">Sophie Bluel <span>Architecte d'intérieur</span></a></h1>
 	<nav>
 		<ul>
+			<!-- menu -->
 			<li><a href="#portfolio">projets</a></li>
 			<li><a href="#contact">contact</a></li>
 			<li><a href="/login.html">login</a></li>
@@ -29,6 +32,7 @@
 	</nav>
 </header>
 <main>
+	<!-- section  introduction -->
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -40,14 +44,18 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+	<!-- section gallerie -->
 	<section id="portfolio">
 		<div class="modify-modal">
 			<h2>Mes projets</h2>
+			<!-- acces à la fenêtre modale 1 -->
 			<a href="#modal1"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 		</div>
 		<!-- ************ FENETRES MODALES ************** -->
 
-		<!-- aria-modal="true" et role="dialog", permettent aux lecteurs d’écran de savoir que le reste de la page (en dehors de la fenêtre modale) est bloquée -->
+		<!-- POUR INFO : aria-modal="true" et role="dialog", permettent aux lecteurs d’écran de savoir que le reste de la page (en dehors de la fenêtre modale) est bloquée -->
+		
+		<!-- modale 1 - visualisation de la gallerie -->
 		<aside id="modal1" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
 			<div class="modal-wrapper">
 				<i class="fa-solid fa-xmark modal-close"></i>
@@ -58,6 +66,7 @@
 
 			</div>
 		</aside>
+		<!-- modale 2 - ajout de travaux -->
 		<aside id="modal2" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
 			<div class="modal-wrapper">
 				<div class="interaction-icons">
@@ -65,7 +74,9 @@
 					<i class="fa-solid fa-xmark modal-close"></i>
 				</div>
 				<h3>Ajout photo</h3>
+				<!-- formulaire ajouter une photo -->
 				<form action="" method="post" class="form-work">
+					<!-- image -->
 					<div class="photo-insert">
 						<i class="fa-regular fa-image"></i>
 						<label for="imageUrl" class="custom-upload">+ Ajouter photo</label>
@@ -73,8 +84,10 @@
 						<span>jpg, png : 4mo max</span>
 					</div>
 					<div class="content-insert">
+						<!-- titre -->
 						<label for="title">Titre</label>
 						<input type="text" id="title" name="title" accept="image/*">
+						<!-- choix categorie -->
 						<label for="categoryId">Catégorie</label>
 						<select name="category" id="categoryId"></select>
 					</div>
@@ -83,9 +96,12 @@
 				</form>
 			</div>
 		</aside>
+		<!-- boutons filtres -->
 		<div class="filter"></div>
+		<!-- gallerie des travaux -->
 		<div class="gallery"></div>
 	</section>
+	<!-- formulaire de contact -->
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -102,6 +118,7 @@
 </main>
 
 <footer>
+	<!-- footer -->
 	<nav>
 		<ul>
 			<li><a href="#">Mentions Légales</a></li>

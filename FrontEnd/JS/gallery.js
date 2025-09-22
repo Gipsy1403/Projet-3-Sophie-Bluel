@@ -1,67 +1,60 @@
-// import { setActiveLink } from "./nav.js";
-//   const linksGallery = document.querySelectorAll("nav a");
-
-//   linksGallery.forEach(link => {
-//     link.addEventListener("click", () => {
-//       // on enlève .active de tous les liens
-//       linksGallery.forEach(l => l.classList.remove("active"));
-
-//       // on ajoute .active seulement au lien cliqué
-//       link.classList.add("active");
-//     });
-//   });
-
-
+// permet de rendre la variables works accessible dans les autres fichiers js
 export let works=[];
+
+// RECUPERATION DES TRAVAUX VIA L'API
+
 export async function loadWorks(){
 	// récupération de l'API
 	const response=await fetch("http://localhost:5678/api/works");
 	works=await response.json();
 	generateWorks(works);
 
-// CREATION DES BOUTONS//
+	// CREATION DES BOUTONS//
 
-const filter=document.querySelector(".filter");
-// création d'un bouton Tous
-const allCategories=document.createElement("button");
-allCategories.innerText="Tous";
-allCategories.dataset.categoryId="all";
-allCategories.classList.add("filter-btn");
-// met le bouton Tous avant les autres boutons
-filter.prepend(allCategories);
-// récupération via l'API de toutes les catégories
-const categories=works.map(work=>work.category);
-// suppression des doublons en créant un nouveau tableau
-const uniqueCategory=[...new Map(categories.map(cat=>[cat.id,cat])).values()];
-// création d'un bouton pour chaque catégorie
-uniqueCategory.forEach(cat=>{
-	const btnElement=document.createElement("button");
-	btnElement.innerText=cat.name;
-	btnElement.dataset.categoryId=cat.id;
-	btnElement.classList.add("filter-btn")
-	filter.appendChild(btnElement);
-});
-
-// ACTIVATION DE CHAQUE BOUTON AU CLIC //
-
-document.querySelectorAll(".filter button").forEach(button=>{
-	button.addEventListener("click", ()=>{
-		document.querySelectorAll(".filter button").forEach(btn => btn.classList.remove("active"));
-		button.classList.add("active");
-
-		const categoryId=button.dataset.categoryId
-		if(categoryId==="all"){
-			generateWorks(works);
-		}else{
-			const filteredWorks=works.filter(work=>work.category.id==categoryId);
-			generateWorks(filteredWorks);
-		}
-		
+	const filter=document.querySelector(".filter");
+	// création d'un bouton Tous
+	const allCategories=document.createElement("button");
+	allCategories.innerText="Tous";
+	allCategories.dataset.categoryId="all";
+	allCategories.classList.add("filter-btn");
+	// met le bouton Tous avant les autres boutons
+	filter.prepend(allCategories);
+	// récupération via l'API de toutes les catégories
+	const categories=works.map(work=>work.category);
+	// suppression des doublons en créant un nouveau tableau
+	const uniqueCategory=[...new Map(categories.map(cat=>[cat.id,cat])).values()];
+	// création d'un bouton pour chaque catégorie
+	uniqueCategory.forEach(cat=>{
+		const btnElement=document.createElement("button");
+		btnElement.innerText=cat.name;
+		btnElement.dataset.categoryId=cat.id;
+		btnElement.classList.add("filter-btn")
+		filter.appendChild(btnElement);
 	});
-});
+
+	// ACTIVATION DE CHAQUE BOUTON AU CLIC //
+
+	document.querySelectorAll(".filter button").forEach(button=>{
+		button.addEventListener("click", ()=>{
+			document.querySelectorAll(".filter button").forEach(btn => btn.classList.remove("active"));
+			button.classList.add("active");
+			// Récupère la valeur de l'id de la catagorie de chaque bouton
+			const categoryId=button.dataset.categoryId
+			if(categoryId==="all"){
+				generateWorks(works);
+			}else{
+				// création d'un tableau contenant les éléments de works dont la catégorie correspond à categoryId
+				const filteredWorks=works.filter(work=>work.category.id==categoryId);
+				generateWorks(filteredWorks);
+			}
+			
+		});
+	});
 
 }
 
+
+// VISUALISATION DES TRAVAUX DANS LA PAGE WEB //
 
 // fonction permettant de récupérer les travaux
 export function generateWorks(works){
@@ -70,7 +63,6 @@ export function generateWorks(works){
 	const gallery=document.querySelector(".gallery");
 	// permet de vider le cache avant de réafficher les images par rapport aux boutons des filtres par catégorie
 	gallery.innerHTML="";
-	
 	for (let i=0; i<works.length; i++){
 		const work=works[i];
 		// création des éléments pour contruire la gallery
@@ -82,7 +74,6 @@ export function generateWorks(works){
 		const textElement=document.createElement("figcaption");
 		// récupération du texte via l'API
 		textElement.innerText=work.title;
-		
 		// rattachement de chacun des éléments à la galerie
 		gallery.appendChild(figureElement);
 		figureElement.appendChild(imageElement);
@@ -94,9 +85,7 @@ export function generateWorks(works){
 loadWorks();
 
 
-// *******************************************//
-// *			FILTRES PAR CATEGORIE		*//
-// *******************************************//
+
 
 
 
