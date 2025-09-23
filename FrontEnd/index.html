@@ -10,9 +10,9 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="/JS/nav.js" defer></script>
-	<script type="module" src="/JS/gallery.js" defer></script>
-	<script type="module" src="/JS/modal.js" defer></script>
+	<script type="module" src="/JS/nav.js" ></script>
+	<script type="module" src="/JS/gallery.js" ></script>
+	<script type="module" src="/JS/modal.js" ></script>
 
 
 </head>
@@ -49,14 +49,14 @@
 		<div class="modify-modal">
 			<h2>Mes projets</h2>
 			<!-- acces à la fenêtre modale 1 -->
-			<a href="#modal1"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
+			<a href="#modal1" class="btn-modify"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 		</div>
 		<!-- ************ FENETRES MODALES ************** -->
 
 		<!-- POUR INFO : aria-modal="true" et role="dialog", permettent aux lecteurs d’écran de savoir que le reste de la page (en dehors de la fenêtre modale) est bloquée -->
 		
 		<!-- modale 1 - visualisation de la gallerie -->
-		<aside id="modal1" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
+		<div id="modal1" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
 			<div class="modal-wrapper">
 				<i class="fa-solid fa-xmark modal-close"></i>
 				<h3 id="title-modal">Galerie photo</h3>
@@ -65,9 +65,9 @@
 				<div class="modal1-message"></div>
 
 			</div>
-		</aside>
+		</div>
 		<!-- modale 2 - ajout de travaux -->
-		<aside id="modal2" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
+		<div id="modal2" class="modal" aria-modal="true" role="dialog" aria-labelledby="title-modal" aria-hidden="true" style="display:none;">
 			<div class="modal-wrapper">
 				<div class="interaction-icons">
 					<i class="fa-solid fa-arrow-left return-previous-modal"></i>
@@ -75,7 +75,7 @@
 				</div>
 				<h3>Ajout photo</h3>
 				<!-- formulaire ajouter une photo -->
-				<form action="" method="post" class="form-work">
+				<form action="#" method="post" class="form-work">
 					<!-- image -->
 					<div class="photo-insert">
 						<i class="fa-regular fa-image"></i>
@@ -86,7 +86,7 @@
 					<div class="content-insert">
 						<!-- titre -->
 						<label for="title">Titre</label>
-						<input type="text" id="title" name="title" accept="image/*">
+						<input type="text" id="title" name="title">
 						<!-- choix categorie -->
 						<label for="categoryId">Catégorie</label>
 						<select name="category" id="categoryId"></select>
@@ -95,7 +95,7 @@
 					<button class="validate-btn">Valider</button>
 				</form>
 			</div>
-		</aside>
+		</div>
 		<!-- boutons filtres -->
 		<div class="filter"></div>
 		<!-- gallerie des travaux -->

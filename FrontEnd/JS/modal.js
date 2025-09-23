@@ -1,7 +1,8 @@
 // import des fonctions WORKS ET GENERAWORKS du fichier gallery.js
 import { works, generateWorks } from "./gallery.js";
-// récupération du token
-const token =localStorage.getItem("token");
+
+
+const token = sessionStorage.getItem("token");
 
 
 // ******************************************** //
@@ -105,8 +106,6 @@ function openModal(e){
 	e.preventDefault();
 	// récupération de l'attribut href de balise a. Cette dernière contient également une balise i, de fait il vaut mieux mettre currentTarget plutôt que Target,permettant ainsi de cliquer soit sur le a ou le i, la fenêtre s'ouvrira quand bien même
 	const target=document.querySelector(e.currentTarget.getAttribute("href"));
-	console.log("target :", target);
-	
 	// suppression du style display:none
 	target.style.removeProperty("display");
 	// suppression de l'aria-hidden de la balise permettant ainsi d'être vu par les lecteurs d'écran
@@ -148,7 +147,14 @@ function closeModal(e){
 }
  
 const modalModify=document.querySelector(".modify-modal a");
-modalModify.addEventListener("click",openModal);
+if (!token) {
+	modalModify.addEventListener("click", (e) => {
+	e.preventDefault();
+	alert("Veuillez vous connecter pour accéder à cette fonctionnalité.");
+	});
+} else {
+	modalModify.addEventListener("click",openModal);
+}
 
 
 // ******************************************** //
@@ -255,7 +261,7 @@ openModal2.addEventListener("click", openSecondModal);
 
 // ****** GESTION DE FORMULAIRE ******* //
 
-// récupération des éléments nécessaires 
+// récupération des éléments du formulaire 
 const sndModal=document.querySelector("#modal2");
 const form=document.querySelector(".form-work");
 const inputImage=document.querySelector("#imageUrl");

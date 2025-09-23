@@ -47,10 +47,9 @@ export async function loadWorks(){
 				const filteredWorks=works.filter(work=>work.category.id==categoryId);
 				generateWorks(filteredWorks);
 			}
-			
+
 		});
 	});
-
 }
 
 
