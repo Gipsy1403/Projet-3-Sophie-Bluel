@@ -1,3 +1,5 @@
+const token = sessionStorage.getItem("token");
+
 // +++++++++++++++++++++++++++++++++++++//
 // 		BARRE DE NAVIGATION			//
 // +++++++++++++++++++++++++++++++++++++//
