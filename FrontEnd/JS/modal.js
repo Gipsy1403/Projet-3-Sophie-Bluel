@@ -88,10 +88,8 @@ export function modalPhotos(){
 			}catch(error){
 				console.error("Erreur réseau: ", error);
 			}
-			
 		});
 	}
-
 }
 modalPhotos();
 
@@ -100,7 +98,6 @@ modalPhotos();
 
 // par défaut la modal n'est pas ouverte
 let modal=null;
-
 function openModal(e){
 	// à l'ouverture de la fenêtre modale, le navigateur ne se recharge pas
 	e.preventDefault();
@@ -110,9 +107,9 @@ function openModal(e){
 	target.style.removeProperty("display");
 	// suppression de l'aria-hidden de la balise permettant ainsi d'être vu par les lecteurs d'écran
 	target.removeAttribute("aria-hidden");
-	// permet aux lecteurs d'écran de lire la fenêtre modale
+	// permet aux lecteurs d'écran de lire seulement la fenêtre modale
 	target.setAttribute("aria-modal", "true");
-	// évite de rappeler à chaque fois document.querySelector
+	// permet de savoir que la modale est actuellement ouverte, ainsi permettant de la manipuler (fermer,écouteurs...)
 	modal=target;
 	// évite de refermer la fenêtre si je clique sur le contenu
 	modal.querySelector(".modal-wrapper").addEventListener("click", e => e.stopPropagation());
@@ -122,7 +119,6 @@ function openModal(e){
 	modal.querySelector(".modal-close").addEventListener("click", closeModal);
 	// rafraichit les works de la modale 1
 	modalPhotos(works);
-
 }
 
 // ****** FERMER LA 1ere MODALE ******* //
@@ -134,13 +130,13 @@ function closeModal(e){
 	e.preventDefault();
 	// la fenêtre modale disparait de l'écran
 	modal.style.display= "none";
-	// remets l'attribut aria hidden à true pour éviter aux les lecteurs d'écran de la lire
+	// remets l'attribut aria hidden à true pour éviter d'être vu par les lecteurs d'écran
 	modal.setAttribute("aria-hidden", "true");
-	// remets l'attribut aria hidden à true à la balise de façon qu'elle reste bloquée
+	// supprime l'attribut aria modal de façon que les lecteurs d'écran ne puissent plus lire la modale
 	modal.removeAttribute("aria-modal");
-	// supprime l'écouteur sur toute la modal (clic en arrière plan)
+	// supprime l'écouteur sur toute la modale (clic en arrière plan)
 	modal.removeEventListener("click",closeModal);
-	// supprime l'écouteur sur la balise i avec la classe .modal-close correspondant au X de la modal
+	// supprime l'écouteur sur la balise i avec la classe .modal-close correspondant au X de la modale
 	modal.querySelector(".modal-close").removeEventListener("click", closeModal);
 	// la fenêtre modale revient à null donc fermée
 	modal=null;
@@ -179,9 +175,9 @@ function openSecondModal(e){
 	modal2.style.removeProperty("display");
 	// suppression de l'aria-hidden de la balise permettant ainsi d'être vu par les lecteurs d'écran
 	modal2.removeAttribute("aria-hidden");
-	// permet aux lecteurs d'écran de lire la fenêtre modale
+	// permet aux lecteurs d'écran de lire seulement la fenêtre modale
 	modal2.setAttribute("aria-modal", "true");
-	// évite de rappeler à chaque fois document.querySelector
+	// permet de savoir que la modale est actuellement ouverte, ainsi permettant de la manipuler (fermer,écouteurs...)
 	secondModal=modal2;
 	// empêche la propagation du clic dans le corps de la modale pour éviter que cela ne la ferme
 	secondModal.querySelector(".modal-wrapper").addEventListener("click", e => e.stopPropagation());
@@ -204,9 +200,9 @@ function returnFirstModal(e){
 	closeSecondModal(e);
 	const modal1=document.querySelector("#modal1");
 	modal1.style.removeProperty("display");
-	// permet aux lecteurs d'écran de la lire
+	// permet aux lecteurs d'écran de voir la modale
 	modal1.removeAttribute("aria-hidden");
-	// remets l'attribut aria hidden à true de façon que le lecteur d'écran reste dans la modale seulement
+	// remets l'attribut aria modal à true de façon que le lecteur d'écran reste seulement dans la modale
 	modal1.setAttribute("aria-modal", "true");
 	modal=modal1;
 	// permet de cliquer à l'intérieur de la modale sans qu'elle se ferme
@@ -220,7 +216,7 @@ function returnFirstModal(e){
 	modalPhotos();
 }
 
-// ****** FERMER LA 12eme MODALE ******* //
+// ****** FERMER LA 2eme MODALE ******* //
 
 function closeSecondModal(e){
 	// vérifie avant d'exécuter la function si la fenêtre modale est fermée. Si tel est le cas alors l'exécution de la function s'arrête 
@@ -242,9 +238,9 @@ function closeSecondModal(e){
   	photoInsert.querySelectorAll("i, label, span").forEach(el => el.style.display = "block");
 	// la fenêtre modale disparait de l'écran
 	secondModal.style.display= "none";
-	// remets l'attribut aria hidden à true pour éviter aux les lecteurs d'écran de la lire
+	// remets l'attribut aria hidden à true pour éviter aux lecteurs d'écran de la voir
 	secondModal.setAttribute("aria-hidden", "true");
-	// supprime l'attribut aria-modal
+	// supprime l'attribut aria-modal afin que les lecteurs d'écran ne puissent plus lire la modale
 	secondModal.removeAttribute("aria-modal");
 	// supprime l'écouteur sur toute la modal (clic en arrière plan)
 	secondModal.removeEventListener("click",closeSecondModal);
@@ -421,7 +417,6 @@ form.addEventListener("submit", async function (e) {
 		// le bouton valider est désactivé
 		validateBtn.disabled=false;
 	}
-
 });
 
 // ****** TELECHARGEMENT DES CATEGORIES ******* //
