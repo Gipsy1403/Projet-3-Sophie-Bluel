@@ -60,7 +60,7 @@ export function generateWorks(works){
 	if (!works || !Array.isArray(works)) return;
 	// déclaration de la section contenant les images
 	const gallery=document.querySelector(".gallery");
-	// permet de vider le cache avant de réafficher les images par rapport aux boutons des filtres par catégorie
+	// vide la galerie avant d’afficher les nouvelles images (selon le filtre choisi)
 	gallery.innerHTML="";
 	for (let i=0; i<works.length; i++){
 		const work=works[i];
@@ -77,7 +77,6 @@ export function generateWorks(works){
 		gallery.appendChild(figureElement);
 		figureElement.appendChild(imageElement);
 		figureElement.appendChild(textElement);
-		
 	}
 };
 
